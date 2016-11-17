@@ -5,14 +5,9 @@ K-means works in any dimension, but is most fun to demonstrate in two, because w
 Lets make some data with clusters. We do this by shifting the means of the points around.
 ```{r}
 set.seed(101)
-#normal distribuition aka bell curve, sd=1
-#rnorm(length)
-#matrix(data, nrows, ncols)
 x=matrix(rnorm(100*2),100,2)
 xmean=matrix(rnorm(8,sd=4),4,2)
-#sample(vector, size, replace)
-which=sample(1:4,100,replace=TRUE)
-# ???
+which=sample(1:4,100,replace=TRUE) # predicted sampling
 x=x+xmean[which,]
 plot(x,col=which,pch=19)
 ```
@@ -21,9 +16,10 @@ We know the "true" cluster IDs, but we wont tell that to the `kmeans` algorithm.
 ```{r}
 km.out=kmeans(x,4,nstart=15)
 km.out
-plot(x,col=km.out$cluster,cex=2,pch=1,lwd=2)
-points(x,col=which,pch=19)
+plot(x,col=km.out$cluster,cex=2,pch=1,lwd=2) #just circles
+points(x,col=which,pch=19) # plots predicted sampling
 points(x,col=c(4,3,2,1)[which],pch=19)
+
 ```
 
 Hierarchical Clustering
